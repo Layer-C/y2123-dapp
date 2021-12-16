@@ -58,6 +58,7 @@ export default function Minting() {
 
   async function claimNFTs() {
     if (active && account) {
+      setErrMsg(''); //reset error message
       const cost = process.env.NEXT_PUBLIC_DISPLAY_COST;
       const totalCost = (Number(cost) * mintAmount).toString();
       setMessage('');
