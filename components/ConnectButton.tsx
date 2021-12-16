@@ -20,7 +20,7 @@ export default function ConnectButton() {
             chainId.toString() !== process.env.NEXT_PUBLIC_NETWORK_ID
           ) {
             setErrMsg(
-              `Change the network to ${process.env.NEXT_PUBLIC_NETWORK_ID}.`
+              `Change the network to ${process.env.NEXT_PUBLIC_NETWORK_NAME}.`
             );
           }
         } catch (error) {
@@ -29,7 +29,7 @@ export default function ConnectButton() {
         }
       } else {
         setErrMsg(
-          `Change the network to ${process.env.NEXT_PUBLIC_NETWORK_ID}.`
+          `Change the network to ${process.env.NEXT_PUBLIC_NETWORK_NAME}.`
         );
       }
     } else {

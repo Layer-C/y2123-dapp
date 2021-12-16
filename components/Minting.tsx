@@ -57,7 +57,7 @@ export default function Minting() {
   }
 
   async function claimNFTs() {
-    if (active && account && !errMsg) {
+    if (active && account) {
       const cost = process.env.NEXT_PUBLIC_DISPLAY_COST;
       const totalCost = (Number(cost) * mintAmount).toString();
       setMessage('');
@@ -120,7 +120,11 @@ export default function Minting() {
       } catch (error) {
         setIsPending(false);
         let e = error as ErrorEthers;
-        setMessage(e.error.message);
+        if (e.error === undefined) {
+          setErrMsg(getErrorMessage(error));
+        } else {
+          setErrMsg(e.error.message.replace('execution reverted: ', ''));
+        }
       }
     }
   }
@@ -175,7 +179,6 @@ export default function Minting() {
   return (
     <>
       <div className="space-y-4 mt-4">
-        <h2 className="text-4xl text-gray-500 mb-4">{isSaleEnabled && !isPresaleEnabled ? ('Minting is Open!') : ('')}</h2>
         <div className={styles.container}>
           <div className="rounded p-8 space-y-4">
             <div className="text-3xl font-bold text-center">
@@ -212,7 +215,7 @@ export default function Minting() {
             </div>
 
             <div className="flex justify-center">
-              {!active || errMsg ? (
+              {!active ? (
                 <button
                   type="button"
                   className={`rounded px-4 py-2 bg-gray-700 font-bold w-40 cursor-not-allowed`}
@@ -269,7 +272,6 @@ export default function Minting() {
             {message && (
               <div className="text-green-500 text-center">{message}</div>
             )}
-            {errMsg && <div className="text-red-500 text-center">{errMsg}</div>}
           </div>
         </div>
       </div>
