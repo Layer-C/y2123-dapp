@@ -73,7 +73,7 @@ export default function Minting() {
         );
 
         let proof: string[] = [];
-        
+
         if (isPresaleEnabled) {
           let list = [
             '0x1EA06bA86982C811e3E2fc300C4322fAAC3005C8',
@@ -115,6 +115,7 @@ export default function Minting() {
             6
           )}...${account.substring(account.length - 4)}`
         );
+        fetchTotalSupply();
       } catch (error) {
         setIsPending(false);
         let e = error as ErrorEthers;
@@ -139,30 +140,31 @@ export default function Minting() {
     }
   }
 
-  useEffect(() => {
-    async function fetchTotalSupply() {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contract = new ethers.Contract(
-        process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
-        ABI.abi,
-        provider
-      );
-      const totalSupply = await contract.totalSupply();
-      setTotalSupply(totalSupply.toString());
+  async function fetchTotalSupply() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contract = new ethers.Contract(
+      process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!,
+      ABI.abi,
+      provider
+    );
+    const totalSupply = await contract.totalSupply();
+    setTotalSupply(totalSupply.toString());
 
-      const saleEnabled = await contract.saleEnabled();
-      setIsSaleEnabled(saleEnabled);
-      const presaleEnabled = await contract.presaleEnabled();
-      setIsPresaleEnabled(presaleEnabled);
+    const saleEnabled = await contract.saleEnabled();
+    setIsSaleEnabled(saleEnabled);
+    const presaleEnabled = await contract.presaleEnabled();
+    setIsPresaleEnabled(presaleEnabled);
 
-      if (saleEnabled && presaleEnabled) {
-        const maxMintPerAddress = await contract.maxMintPerAddress();
-        setMintMax(maxMintPerAddress);
-      } else if (saleEnabled && !presaleEnabled) {
-        const maxMintPerTx = await contract.maxMintPerTx();
-        setMintMax(maxMintPerTx);
-      }
+    if (saleEnabled && presaleEnabled) {
+      const maxMintPerAddress = await contract.maxMintPerAddress();
+      setMintMax(maxMintPerAddress);
+    } else if (saleEnabled && !presaleEnabled) {
+      const maxMintPerTx = await contract.maxMintPerTx();
+      setMintMax(maxMintPerTx);
     }
+  }
+
+  useEffect(() => {
     if (
       active &&
       chainId &&
