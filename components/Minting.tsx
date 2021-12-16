@@ -174,8 +174,8 @@ export default function Minting() {
 
   return (
     <>
-      <h2 className="text-4xl text-gray-500 mb-4 font-bold text-center">{isSaleEnabled && isPresaleEnabled ? ('Whitelist Minting is Open!') : ('')}</h2>
       <div className="space-y-4 mt-4">
+        <h2 className="text-4xl text-gray-500 mb-4">{isSaleEnabled && !isPresaleEnabled ? ('Minting is Open!') : ('')}</h2>
         <div className={styles.container}>
           <div className="rounded p-8 space-y-4">
             <div className="text-3xl font-bold text-center">
