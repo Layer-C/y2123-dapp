@@ -73,10 +73,11 @@ export default function Minting() {
         );
 
         let proof: string[] = [];
+        
         if (isPresaleEnabled) {
           let list = [
-            '0xBD55d43702087b1A8C16Bf052Be549d7c4172f07',
-            '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+            '0x1EA06bA86982C811e3E2fc300C4322fAAC3005C8',
+            '0x5871E261e4f1208ea70d9D3E109C3Bb329b6053A',
             '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC',
             '0x90F79bf6EB2c4f870365E785982E1f101E93b906',
             '0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65',
@@ -97,12 +98,8 @@ export default function Minting() {
             '0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199'
           ]
           let merkleTree = new MerkleTree(list, keccak256, { hashLeaves: true, sortPairs: true });
-          let root = merkleTree.getHexRoot();
-          console.log("root is %s", root);
           const hashedAddress = keccak256(account);
-          console.log("Hashed Address: ", hashedAddress);
           proof = merkleTree.getHexProof(hashedAddress);
-          console.log("owner proof is %s", proof);
         }
 
         const transaction = await contract.paidMint(mintAmount, proof, { value: ethers.utils.parseEther(totalCost) });
