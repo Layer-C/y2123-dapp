@@ -110,7 +110,7 @@ export default function Header() {
         </Container>
       </header>
 
-      {errMsg && <div className="bg-red-400 p-4 text-center">{errMsg}</div>}
+      {errMsg && <div className="bg-red-400 p-4 text-center text-pink-900">{errMsg}</div>}
     </div>
   );
 }

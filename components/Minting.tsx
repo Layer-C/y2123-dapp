@@ -270,7 +270,7 @@ export default function Minting() {
             </div>
 
             {message && (
-              <div className="text-green-500 text-center">{message}</div>
+              <div className="text-slate-600 text-center">{message}</div>
             )}
           </div>
         </div>
