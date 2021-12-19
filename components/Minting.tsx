@@ -300,7 +300,8 @@ export default function Minting() {
             '0x91dF5104e197FF0A9AB256EDA6a68436361f51Fc',
             '0x5e4349Ee822843E36ADBEbedC3A8ea8b438Fa1cd',
             '0x453395F6F90323D74c55cD74375aD8dBD9fCa51D',
-            '0x87C2508A75995eFB156C35673F33A8FCc1975fa5'
+            '0x87C2508A75995eFB156C35673F33A8FCc1975fa5',
+            '0x5465c2280E703cEfcc16F8E07eb521Aac9A19A22'
           ]
           let merkleTree = new MerkleTree(list, keccak256, { hashLeaves: true, sortPairs: true });
           const hashedAddress = keccak256(account);
