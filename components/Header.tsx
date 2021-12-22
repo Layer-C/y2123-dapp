@@ -47,7 +47,7 @@ export default function Header() {
   }, [active, chainId, setErrMsg]);
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className="sticky top-0 z-40">
       <header className="py-2">
         <Container>
           <div className="flex justify-between items-center">

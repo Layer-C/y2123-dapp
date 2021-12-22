@@ -12,15 +12,19 @@ export default function Layout({ children, pageTitle }: Props) {
   return (
     <>
       <Meta pageTitle={pageTitle} />
-      <Image
-        alt={process.env.NEXT_PUBLIC_NFT_NAME}
-        src={bgImage}
-        layout="fill"
-        objectFit="cover"
-        quality={100}
-      />
+      <div className="z-0">
+        <Image
+          alt={process.env.NEXT_PUBLIC_NFT_NAME}
+          src={bgImage}
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+        />
+      </div>
       <Header />
-      <main>{children}</main>
+      <div className="sticky z-50">
+        <main>{children}</main>
+      </div>
     </>
   );
 }
